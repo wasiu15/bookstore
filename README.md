@@ -25,6 +25,7 @@ and how to use container technologies like;
 I've created a software architecture diagram which shows all the moving parts in the application. Services communicate synchronously using gRPC while asynchronous communication are done with RabbitMQ Publish/Subscribe Topic Exchange Model.
 
 
+![68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f6465657665656868642f696d6167652f75706c6f61642f76313633313035353033302f556e7469746c65645f4469616772616d5f322e6a7067](https://github.com/wasiu15/bookstore/assets/66498295/b579eb8e-5759-41c0-a0c9-7f096bca5228)
 
 
 ### Catalog(Book) Service
