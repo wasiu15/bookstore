@@ -21,23 +21,23 @@ namespace Catalog.API.Data
                 new Product()
                 {
                     Id = Guid.NewGuid().ToString(),
-                    Title = "IPhone X",
-                    Genre = "Genre",
-                    CoverImageUrl = "product-1.png",
-                    AboutAuthor = "Author1",
+                    Title = "To Kill a Mockingbird",
+                    Genre = "Fiction",
+                    CoverImageUrl = "mockingbird-cover.png",
+                    AboutAuthor = "Harper Lee",
                     Price = 950.00M,
-                    AvailableQuantity = 5,
+                    AvailableQuantity = 50,
                     PublicationDate = DateTime.UtcNow
                 },
                 new Product()
                 {
                     Id = Guid.NewGuid().ToString(),
-                    Title = "Samsung 10",
-                    Genre = "Genre2",
-                    CoverImageUrl = "product-2.png",
-                    AboutAuthor = "Author2",
+                    Title = "The Great Gatsby",
+                    Genre = "Non-Fiction",
+                    CoverImageUrl = "gatsby-cover.png",
+                    AboutAuthor = "F. Scott Fitzgerald",
                     Price = 320.00M,
-                    AvailableQuantity = 20,
+                    AvailableQuantity = 30,
                     PublicationDate = DateTime.UtcNow
                 }
             };

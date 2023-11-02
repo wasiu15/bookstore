@@ -53,34 +53,38 @@ namespace Basket.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Checkout([FromBody] BasketCheckout basketCheckout)
         {
-            // get existing basket with total price 
-            // Create basketCheckoutEvent -- Set TotalPrice on basketCheckout eventMessage
-            // send checkout event to rabbitmq
-            // remove the basket
-
-            // get existing basket with total price
+            // 1. Get the existing basket with the total price
             var basket = await _repository.GetBasket(basketCheckout.UserName);
+
+            // 2. If the basket does not exist, return a Bad Request response
             if (basket == null)
             {
                 return BadRequest();
             }
 
-            // send checkout event to rabbitmq
+            // 3. Create a BasketCheckoutEvent and set the TotalPrice on the eventMessage
             var eventMessage = _mapper.Map<BasketCheckoutEvent>(basketCheckout);
             eventMessage.TotalPrice = basket.TotalPrice;
+
+            // 4. Send the checkout event to RabbitMQ
             await _publishEndpoint.Publish(eventMessage);
 
-            // send ordered items list event to rabbitmq so we can remove them from the stock
-            var shoppingCart = new ShoppingCart{};
+            // 5. Create a shoppingCart and populate it with items from the basket
+            var shoppingCart = new ShoppingCart();
             shoppingCart.Items.AddRange(basket.Items);
+
+            // 6. Create a RemoveOrderedItemsEvent and map the shoppingCart to it
             var eventBasket = _mapper.Map<RemoveOrderedItemsEvent>(shoppingCart);
+
+            // 7. Send the ordered items list event to RabbitMQ so that they can be removed from the stock
             await _publishEndpoint.Publish(eventBasket);
 
-
-            // remove the basket
+            // 8. Remove the basket from the repository
             await _repository.DeleteBasket(basket.UserName);
 
+            // 9. Return an Accepted response to indicate the successful completion of the process
             return Accepted();
+
         }
     }
 }
