@@ -22,7 +22,7 @@ and how to use container technologies like;
 # Software Architecture
 [(Back to top)](#table-of-contents)
 
-I've created a software architecture diagram which shows all the moving parts in the application. Services communicate synchronously using gRPC while asynchronous communication are done with RabbitMQ Publish/Subscribe Topic Exchange Model.
+I've created a software architecture diagram which shows all the moving parts in the application. Services communicate asynchronously using RabbitMQ Publish/Subscribe Topic Exchange Model.
 
 
 ![api_images](https://github.com/wasiu15/bookstore/assets/66498295/09044c9b-550a-469d-990b-1acb569579b9)
